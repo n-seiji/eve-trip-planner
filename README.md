@@ -8,7 +8,7 @@
 
 ```
 agent/
-├── agent.ts                  # model: anthropic/claude-sonnet-4.6（AI Gateway 経由）
+├── agent.ts                  # model: OpenAI 直叩き（@ai-sdk/openai, OPENAI_API_KEY）
 ├── instructions.md           # 旅行プランナーの役割・方針（常時適用の system prompt）
 ├── channels/eve.ts           # scaffold 生成のチャネル設定
 ├── tools/
@@ -26,20 +26,20 @@ agent/
 依存はスキャフォールド時にインストール済み。クローンし直した場合は:
 
 ```bash
-npm install
+pnpm install
 ```
 
-### AI Gateway 認証（ローカル実行に必須）
+### モデル認証（ローカル実行に必須）
 
-Eve はモデル呼び出しを [AI Gateway](https://vercel.com/docs/ai-gateway) 経由で行います。ローカルで動かすには認証が必要です。いずれかを用意してください:
+このエージェントは Vercel AI Gateway を経由せず、`@ai-sdk/openai` で **OpenAI を直接呼びます**（`agent/agent.ts` 参照）。`OPENAI_API_KEY` を `.env.local` に設定してください:
 
-- Vercel にログイン（OIDC）: `npx vercel login`
-- もしくは AI Gateway の API キーを発行し、`.env.local` に設定:
-  ```
-  AI_GATEWAY_API_KEY=...
-  ```
+```
+OPENAI_API_KEY=sk-...
+```
 
 > 秘密情報は `.gitignore` 済みの `.env*` にのみ置き、コミットしないこと。
+
+別のプロバイダや Vercel AI Gateway を使いたい場合は `agent/agent.ts` の `model` を差し替える（Gateway 経由は `model: "openai/gpt-5.4-mini"` のような文字列指定。ただし Gateway はカード登録が必要）。
 
 ## 起動
 

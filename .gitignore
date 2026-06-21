@@ -9,3 +9,6 @@ node_modules
 dist
 .DS_Store
 *.tsbuildinfo
+
+# npm のロックファイルは使わない（pnpm 運用）
+package-lock.json
