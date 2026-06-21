@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import tool from "./search_hotels.js";
+import tool from "../agent/tools/search_hotels.js";
 import { stubToolContext } from "./_test-context.js";
 
 describe("search_hotels", () => {

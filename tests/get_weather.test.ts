@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import tool from "./get_weather.js";
+import tool from "../agent/tools/get_weather.js";
 import { stubToolContext } from "./_test-context.js";
 
 describe("get_weather", () => {
